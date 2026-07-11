@@ -60,5 +60,5 @@ Get-ChildItem -Recurse "$env:CMDER_ROOT/config" | Format-Table LastWriteTime, mo
 
 Get-Content "$env:temp\cmder_diag_ps.log"
 
-Write-Host -Object ""
-Write-Host -Object "Above output was saved in $env:temp\cmder_diag_ps.log"
+Write-Output ""
+Write-Output "Above output was saved in $env:temp\cmder_diag_ps.log"

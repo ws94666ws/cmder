@@ -1,4 +1,4 @@
-function Ensure-Exists($path) {
+﻿function Ensure-Exists($path) {
     if (-not (Test-Path $path)) {
         Write-Error "Missing required $path! Ensure it is installed"
         exit 1
@@ -70,6 +70,11 @@ function Digest-Hash($path) {
 }
 
 function Set-GHVariable {
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute(
+        'PSUseShouldProcessForStateChangingFunctions',
+        '',
+        Justification = 'Writes GitHub Actions environment files in non-interactive CI; WhatIf/Confirm would not be meaningful.'
+    )]
     param(
         [Parameter(Mandatory = $true)]
         [string]$Name,
@@ -438,7 +443,7 @@ function Get-ArtifactDownloadUrl {
                 }
             }
         } catch {
-            Write-Host "Attempt $($i + 1) failed to get artifact URL for $ArtifactName : $_"
+            Write-Warning "Attempt $($i + 1) failed to get artifact URL for $ArtifactName : $_"
         }
         
         if ($i -lt ($MaxRetries - 1)) {
