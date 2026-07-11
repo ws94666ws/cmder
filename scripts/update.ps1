@@ -308,7 +308,7 @@ foreach ($s in $sources) {
         # Analyze version change type using shared function
         $result = Get-VersionChangeType -OldVersion $s.version -NewVersion $version
         $changeType = $result.ChangeType
-        
+
         # Determine if this is a breaking change
         if ($changeType -eq "downgrade" -or $changeType -eq "major") {
             $hasBreakingChanges = $true
